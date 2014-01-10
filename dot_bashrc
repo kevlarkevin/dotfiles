@@ -7,9 +7,11 @@ shopt -s cdspell
 shopt -s histappend
 export HISTCONTROL=ignoredups:ignorespace
 export HISTIGNORE=ls:l:la:ll:lk:lt:lc:lu:cd:pwd
-export GREP_OPTIONS='--color'
+export GREP_OPTIONS='--color=auto'
+export LS_OPTIONS='--color=auto'
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+export LS_COLORS='di=36;1:fi=0:ln=95;1:pi=5:so=5:bd=5:cd=5:or=37:mi=0:ex=31;1:'
 export EDITOR='vim'
 
 # Plugins
