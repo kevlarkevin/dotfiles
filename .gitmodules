@@ -1,0 +1,6 @@
+[submodule "dot_vim/bundle/vim-airline"]
+	path = dot_vim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "dot_vim/bundle/vim-gitgutter"]
+	path = dot_vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git

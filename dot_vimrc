@@ -1,0 +1,254 @@
+" ~/.vimrc
+
+
+" General Settings
+    filetype plugin indent on           " Filetype-specific plugins, indentation
+    set number                          " Show line numbers
+    set numberwidth=5                   " Line number column width
+    set showcmd                         " Show commands as they are typed
+    syntax on                           " Syntax highlighting
+    set synmaxcol=5000                  " Stop syntax hl after n char/ln
+    set wildmenu                        " List of matches above cmd line
+    set wildmode=list:longest,full      " Match > longest > all
+    set lazyredraw                      " Do not redraw when running macros
+    set autoindent                      " Enable autoindent
+    set smartindent                     " Enable smartindent
+    set list                            " Show 'hidden' characters
+    set listchars=tab:<-,trail:~        " Show tabs and trailing spaces
+    set scrolloff=5                     " Scroll off, cursor context
+    set scrolljump=3                    " Lines to scroll at a time
+    set virtualedit=block,onemore       " Allow virtual editing in block mode
+    set diffopt+=vertical,iwhite        " Vertical diffsplits: ignore whitespace
+    set autoread                        " Autoread changes made out of vim
+    set showmode                        " Show current mode
+    set nostartofline                   " Leave the cursor alone on scrolling
+    set magic                           " Regex magic
+    " set errorbells                      " Enable audio and visual bell
+    set visualbell                      " Visual bell only
+    " set visualbell t_vb=                " No bell at all
+    set textwidth=0                     " Auto adjust width
+    set wrap                            " Allow text wrapping
+    set linebreak                       " Don't break words
+    " set showbreak=>>>                   " Mark broken lines with >>>
+
+
+" File Tabs
+    set showtabline=2
+    " Increase the maximum number to tab pages
+    set tabpagemax=25
+
+
+" Search
+    set incsearch                      " Incremental search
+    " set infercase                      " Match the case of existing text
+    set ignorecase                     " If all lower, ignore case
+    set smartcase                      " If search param has upper, use cased
+    set wrapscan                       " Wrap search at EOF
+    set hlsearch                       " Highlight seach terms
+    set hl=l:Visual
+
+
+" Tabs
+    set tabstop=4                      " Size of tab
+    set shiftwidth=4                   " Num spaces for indentation
+    set expandtab                      " Spaces instead of tabs
+    set softtabstop=4                  " Delete 4 spaces if delete at tabstop
+
+    " smarter tab key
+    inoremap <tab> <C-r>=CleverTab(0)<CR>
+    inoremap <s-tab> <C-r>=CleverTab(1)<CR>
+    function! CleverTab(direction)
+        if getline('.')[col('.')-2] =~ '\s\|^$'
+            return "\<tab>"
+        elseif a:direction
+            return "\<C-p>"
+        else
+            return "\<C-n>"
+        endif
+    endfunction
+
+
+" Completion Pop-Up Settings
+    set pumheight=15                    " Don't show >n items popup
+    set completeopt=menu,longest        " How to show and insert completions
+    " set completeopt=longest,menuone,menu,preview
+    set complete=.,w,u,b                " Where to look for completions
+
+
+" Colorscheme
+    set background=dark
+    colorscheme zenburn                 " Set color scheme
+
+
+" Statusline
+    set laststatus=2                    " Always display the status line
+
+    function! GitBranch()
+        let branch = system("git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* //' -e 's/$/\]/'")
+        if branch != ''
+            return ' [± ' . substitute(branch, '\n', '', 'g')
+        en
+        return ''
+    endfunction
+
+    function! HasPaste()
+        if &paste
+            return 'PASTE '
+        en
+        return ''
+    endfunction
+
+    set statusline=%7(%{HasPaste()}%)
+    set statusline+=%{GitBranch()}
+    set statusline+=%3(%r%)
+    set statusline+=%f
+    set statusline+=%3(%m%)
+    set statusline+=%=
+    set statusline+=%{'['.&ff.'\ '.(&fenc==''?&enc:&fenc).']'}
+    set statusline+=%y[%4(%P%)]
+    set statusline+=[㏑%4l:%3c/%4L]
+
+
+    " Change status line color based on VIM mode
+    au InsertEnter * call InsertStatuslineColor(v:insertmode)
+    au InsertChange * call InsertStatuslineColor(v:insertmode)
+    au InsertLeave * hi statusline guibg=grey
+    function! InsertStatuslineColor(mode)
+        if a:mode == 'i'
+            hi statusline guibg=DeepSkyBlue
+        elseif a:mode == 'r'
+            hi statusline guibg=OrangeRed
+        else
+            hi statusline guibg=pink
+        endif
+    endfunction
+
+    " Default the statusline to green when entering Vim
+    hi statusline guibg=grey
+
+
+" Python Mode
+    au FileType python      call ModePython()
+    function! ModePython()
+
+        " Disable smartindent feature that puts # at beginning of line
+        " inoremap <buffer> # X<C-H>#
+
+        " Auto-close multi-lines comments
+        " inoremap <buffer> """ """"""<Left><Left><Left>
+
+        " Auto-close single quotes
+        " inoremap <buffer> ' ''<Left>
+
+    endfunction
+
+
+" Key Mappings and Bindings
+    set backspace=indent,eol,start      " Set backspace behavior
+    set whichwrap=b,s,h,l,<,>,[,]       " Backspace and cursors wrap
+
+    " Move between visible lines, not real lines
+    map <silent> k      gk
+    map <silent> j      gj
+    map <silent> <Up>   gk
+    map <silent> <Down> gj
+
+    imap <silent> <Up>   <C-o><Up>
+    imap <silent> <Down> <C-o><Down>
+    imap <silent> <home> <C-o><home>
+    imap <silent> <end>  <C-o><end>
+
+    " Ctrl-T creates a new tab and opens the file explorer
+    map  <silent> <C-t> :Texplore<CR>
+    imap <silent> <C-t> <Esc><C-t>
+
+    " Ctrl-K clears highlight (after a search)
+    map  <silent> <C-k> :noh<CR>
+    imap <silent> <C-k> <C-o><C-k>
+
+    " Ctrl-CR sends current or highlighted line(s) to Mac OS Terminal.app
+    map  <silent> <C-CR> :call SendToTerminal(0, 1)<CR>
+    vmap <silent> <C-CR> :call SendToTerminal(1, 1)<CR>
+    imap <silent> <C-CR> <C-o><C-CR>
+
+    map  <silent> <C-M-CR> :call SendToTerminal(0, 0)<CR>
+    vmap <silent> <C-M-CR> :call SendToTerminal(1, 0)<CR>
+    imap <silent> <C-M-CR> <C-o><C-M-CR>
+
+    function! SendToTerminal(visual, trim_leadspace) range
+        " move to next line if not in visual mode
+        if !a:visual
+            execute "normal \<C-n>"
+        endif
+        let cmds = []
+        if a:trim_leadspace
+            for line in getline(a:firstline,a:lastline)
+                let cmds += [escape(escape(substitute(line, '^\s\+', '', ''), '\"'), '\"`!#$%')]
+            endfor
+        else
+            for line in getline(a:firstline,a:lastline)
+                let cmds += [escape(escape(line, '\"'), '\"`!#$%')]
+            endfor
+        endif
+        silent execute '!osascript -e "tell application \"Terminal\" to do script \"' . join(cmds, '\n') . '\" in window 1"'
+    endfunction
+
+
+" Miscellaneous
+    command! RcEdit    :e ~/.vimrc      " register RcEdit command
+    command! RcReload  :source ~/.vimrc " register RcReload command
+
+    " Remove trailing spaces when writing non-binary buffers
+    au BufWrite * if ! &bin | call RemoveTrailingSpaces() | endif
+    function! RemoveTrailingSpaces()
+        exe "normal msHmtgg"
+        %s/\s\+$//e
+        exe "normal 'tzt`s"
+    endfunction
+
+    " Always set the current working directory to the currently edited file
+    au BufRead,BufNewFile,BufFilePost * lcd %:p:h
+
+    " Try to restore cursor position when reading a buffer, if any
+    au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    " Delete any buffer that becomes hidden
+    au BufReadPost,BufNewFile,BufFilePost * set bufhidden=delete
+
+    " Prevent some files/directories from being listed in file explorer
+    let g:netrw_hide=1
+    let g:netrw_list_hide='\.pyc$,\.pyo$,\.o$,\.swp$,^\.svn/$,^\.DS_Store$'
+
+
+" MacVim
+    if has("gui_macvim") && has("gui_running")
+        set lines=86                    " Resize the window
+        set columns=155
+        set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
+        set guioptions-=T               " Remove the toolbar
+        set guicursor=a:blinkon0        " Disable cursor blink
+        set guitablabel=%m\ %t          " Define custom label when using GUI tabs
+        set fuoptions=maxvert,maxhorz   " Maximize when entering fullscreen mode
+
+        " PRINTING
+        " Turn off syntax highlighting for printing and set papersize
+        " set printoptions=syntax:n,paper:letter
+    endif
+
+
+" Pathogen
+    call pathogen#infect()
+    call pathogen#helptags()
+
+    " Git-Gutter
+    highlight clear SignColumn
+    let g:gitgutter_sign_column_always = 1
+
+    " Airline
+    let g:airline_powerline_fonts = 1
+
+
+" Local Configuration
+    if filereadable(glob("~/.vimrc.local"))
+        source ~/.vimrc.local
+    endif

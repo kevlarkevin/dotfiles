@@ -1,0 +1,9 @@
+#!/bin/bash
+# ~/.profile
+
+
+# osx terminal always runs as a login shell, therefore always loads ~/.profile
+# everything goes to ~/.bashrc
+if [ -a ~/.bashrc ]; then
+  source ~/.bashrc
+fi

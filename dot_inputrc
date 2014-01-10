@@ -1,0 +1,8 @@
+TAB: complete
+#"\e[Z": menu-complete-backward
+"\e[Z": menu-complete
+
+set completion-ignore-case on
+set bell-style none
+set expand-tilde on
+set show-all-if-ambiguous on
