@@ -25,9 +25,13 @@ if [ $(uname) == Darwin ]; then
         tmux tmux-pasteboard \
         py27-ipython +scientific +notebook +parallel \
         py27-pip py27-virtualenv py27-virtualenvwrapper \
+        py27-flake8
         git-core \
         curl \
         bash-completion
+
+    sudo port select --set pep8 pep827
+    sudo port select --set pyflakes py27-pyflakes
     sudo port select --set python python27
     sudo port select --set ipython ipython27
     sudo port select --set virtualenv virtualenv27
@@ -35,7 +39,7 @@ if [ $(uname) == Darwin ]; then
 fi
 
 # Make dot_vim directory
-[ ! -d $dir/dot_vim ] && mkdir -p $dir/dot_vim/{autoload,bundle,colors,view}
+[ ! -d $dir/dot_vim ] && mkdir -p $dir/dot_vim/{autoload,colors}
 
 # Make links
 ln -sf $dir $HOME/.dotfiles
@@ -46,7 +50,7 @@ for file in $(ls $dir | grep '^dot_'); do
 done
 
 # Make directory for virtualenvs
-[ ! -d $HOME/.virtualenvs ] && mkdir -p $HOME/.virtualenvs
+[ ! -d !/VirtualEnvs ] && mkdir -p ~/VirtualEnvs
 
 # Download pathogen for vim
 curl -Sso ~/.vim/autoload/pathogen.vim \
@@ -56,9 +60,10 @@ curl -Sso ~/.vim/autoload/pathogen.vim \
 curl -Sso ~/.vim/colors/zenburn.vim \
     http://slinky.imukuppi.org/zenburn/zenburn.vim
 
-# Download Ssbmodules
+# Download Submodules
 git submodule init
 git submodule update
+#git submodule foreach git checkout master
 
 # Garbage cleanup
 # rm -vi $HOME/.*.$today.bak

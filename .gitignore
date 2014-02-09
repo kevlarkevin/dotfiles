@@ -1,1 +1,5 @@
-dot_vim/*
+*.swp
+*.py[co]
+*.netrwhist
+*pathogen.vim
+*zenburn.vim

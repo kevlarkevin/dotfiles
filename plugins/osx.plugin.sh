@@ -14,6 +14,11 @@ if [ $(uname) == Darwin ]; then
         # git-core extras
         source /opt/local/share/git-core/contrib/completion/git-completion.bash
         source /opt/local/share/git-core/contrib/completion/git-prompt.sh
+
+        # virtualenv + virtualenvwrapper
+        source /opt/local/bin/virtualenvwrapper.sh-2.7
+        export WORKON_HOME=$HOME/VirtualEnvs
+        export PROJECT_HOME=$HOME/Projects
     fi
 
     # Change directory to front Finder window's location
@@ -135,3 +140,8 @@ if [ $(uname) == Darwin ]; then
         fi
     }
 fi
+
+if [ $(uname) == Darwin ] && [ -s /Applications/Sublime\ Text.app ]; then
+    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+fi
+
