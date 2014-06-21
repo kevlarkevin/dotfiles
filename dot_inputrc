@@ -1,6 +1,8 @@
 TAB: complete
 #"\e[Z": menu-complete-backward
 "\e[Z": menu-complete
+"\e[A": history-search-backward
+"\e[B": history-search-forward
 
 set completion-ignore-case on
 set bell-style none
