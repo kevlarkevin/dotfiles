@@ -17,8 +17,8 @@
 
     " Python-Mode
     let g:pymode_options = 0
-    let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-    let g:pymode_lint_ignore = "E222,E501,E701"
+    let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257']
+    let g:pymode_lint_ignore = "E222,E501,E701,E126,D101,D102"
     let g:pymode_lint_cwindow = 0
     let g:pymode_folding = 0
     let g:pymode_run = 0
@@ -73,6 +73,7 @@
     set smartcase                       " If search param has upper, use cased
     set wrapscan                        " Wrap search at EOF
     set hlsearch                        " Highlight seach terms
+
     " Indentation
     set autoindent                      " Enable autoindent
     set smartindent                     " Enable smartindent
@@ -89,7 +90,12 @@
     " Visuals
     set showtabline=2                   " Always display the file tab line
     set laststatus=2                    " Always display the status line
+    set background=dark
     colorscheme zenburn                 " Set color scheme
+
+    " Column Indicators
+    " highlight ColorColumn ctermbg=235 guibg=#2c2d27
+    " let &colorcolumn="80,120"
 
 
 " Key Mappings and Bindings
@@ -162,7 +168,7 @@
 " MacVim
     if has("gui_macvim") && has("gui_running")
         set lines=86                    " Resize the window
-        set columns=155
+        set columns=165
         set guifont=Ubuntu\ Mono\ derivative\ Powerline:h12
         set guioptions-=T               " Remove the toolbar
         set guicursor=a:blinkon0        " Disable cursor blink

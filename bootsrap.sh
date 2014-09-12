@@ -53,8 +53,8 @@ done
 [ ! -d !/VirtualEnvs ] && mkdir -p ~/VirtualEnvs
 
 # Download pathogen for vim
-curl -Sso ~/.vim/autoload/pathogen.vim \
-    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+curl -LSso ~/.vim/autoload/pathogen.vim \
+    https://tpo.pe/pathogen.vim
 
 # Download zenburn colorscheme for vim
 curl -Sso ~/.vim/colors/zenburn.vim \
@@ -63,10 +63,6 @@ curl -Sso ~/.vim/colors/zenburn.vim \
 # Download Submodules
 git submodule init
 git submodule update
-#git submodule foreach git checkout master
-
-# Garbage cleanup
-# rm -vi $HOME/.*.$today.bak
 
 # Reload
 source $HOME/.profile

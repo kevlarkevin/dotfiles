@@ -10,8 +10,7 @@ export HISTIGNORE=ls:l:la:ll:lk:lt:lc:lu:cd:pwd
 export GREP_OPTIONS='--color=auto'
 export LS_OPTIONS='--color=auto'
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-export LS_COLORS='di=36;1:fi=0:ln=95;1:pi=5:so=5:bd=5:cd=5:or=37:mi=0:ex=31;1:'
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd    # linux ish
 export EDITOR='vim'
 
 # Plugins
@@ -21,10 +20,11 @@ for plugin in $(ls $configdir/plugins | grep -v disabled$ ); do
 done
 
 # Augment PATH
-[ -d ~/Applications ] && PATH=~/Applications:$PATH
+[ "$(uname)" == "Darwin" ] && [ -d ~/Applications ] && PATH=~/Applications:$PATH
 [ -d ~/bin ] &&  PATH=~/bin:$PATH
 
 # Aliases and Functions
+[ "$(uname)" == "Linux" ] && alias ls='ls --color=auto'
 alias l='ls -CF'        # multicolumn with suffixes for file type
 alias la='ls -A'        # list all except ./ and ../
 alias ll='ls -alFh'     # show  dot dirs, list long, w/ type suffix
