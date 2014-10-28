@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ARGV0 = $0  # command
+ARGV1 = $1  # virtual machine to modify
+
+echo "cmd to enable NAT DNS host resolver:"
+echo "VBoxManage modifyvm $1 --natdnshostresolver1 on"
