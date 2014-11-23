@@ -24,11 +24,14 @@ if [ $(uname) == Darwin ]; then
         macvim +huge +python27 \
         tmux tmux-pasteboard \
         py27-ipython +scientific +notebook +parallel \
-        py27-pip py27-virtualenv py27-virtualenvwrapper \
+        py27-pip py27-virtualenv \
         py27-flake8
         git-core \
         curl \
-        bash-completion
+        bash-completion \
+        mongodb \
+        nginx \
+
 
     sudo port select --set pep8 pep827
     sudo port select --set pyflakes py27-pyflakes
