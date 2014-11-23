@@ -1,0 +1,15 @@
+assumes you use macports
+assumes you have python 2.7 installed via macports
+assumes you have run `sudo port select --set python python27`
+assumes you have run `sudo pip install uwsgi`
+
+The launchdaemon is for running uwsgi emperor, but the `uwsgi` and `uwsgidecorators` modules
+are not available within virtualenvs.  To use uwsgi within a virtualenv, `pip install uwsgi` in that
+venv.
+
+Yea, it sorta sucks to have to install uwsgi all over the place, but it's better than having a launchdaemon
+looking for an executable within a virtualenv.
+
+Installing to macports python2.7 works for me, because almost everything i do is inside of a virtualenv.
+In effect, this almost treats the macports python2.7 install as a "protected space" to install things to be
+used by the system.

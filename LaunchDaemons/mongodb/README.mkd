@@ -1,0 +1,19 @@
+macports provides a launchdaemon plist for mongodb, but it didn't work for me out of
+the box.  There was an semi-colon that terminate the command, and an option that did not work
+for the `mongod` command.
+
+So I modified it a bit to work for me.
+
+Considerations:  I want mongod to run under a dedicated user `_mongo`, meaning
+logfiles, and pidfiles must be writeable to said user `_mongo`.
+
+create directories for logging and pid file storage, make those writable to the mongo user `_mongo`
+
+    # log file
+    sudo mkdir -p /opt/local/var/log/mongodb
+    sudo touch /opt/local/var/log/mongodb/mongodb.lob
+    sudo chown _mongo:_mongo /opt/local/var/log/mongodb/mongodb.log
+    # pid file
+    sudo mkdir -p /opt/local/var/run/mongodb
+    sudo touch /opt/local/var/run/mongodb/mongodb.pid
+    sudo chown _mongo:_mongo /opt/local/var/run/mongodb/mongodb.pid

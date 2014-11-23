@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+"http://www.apple.com/DTDs/PropertyList-1.0.dtd" >
+<plist version='1.0'>
+<dict>
+<key>Label</key><string>org.macports.mongodb</string>
+<key>ProgramArguments</key>
+<array>
+	<string>/opt/local/bin/daemondo</string>
+	<string>--label=mongodb</string>
+	<string>--start-cmd</string>
+	<string>sudo</string>
+	<string>-u</string>
+	<string>_mongo</string>
+	<string>/opt/local/bin/mongod</string>
+	<string>--dbpath</string>
+	<string>/opt/local/var/db/mongodb</string>
+	<string>--logpath</string>
+	<string>/opt/local/var/log/mongodb/mongodb.log</string>
+	<string>--logappend</string>
+	<string>--pidfilepath</string>
+	<string>/opt/local/var/run/mongodb/mongodb.pid</string>
+</array>
+<key>Debug</key><false/>
+<key>Disabled</key><true/>
+<key>KeepAlive</key><true/>
+</dict>
+</plist>

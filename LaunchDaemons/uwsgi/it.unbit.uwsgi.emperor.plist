@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>Label</key><string>it.unbit.uwsgi.emperor</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/uwsgi</string>
+            <string>--emperor</string>
+            <string>/opt/local/etc/uwsgi/apps-enabled</string>
+            <string>--emperor-on-demand-directory</string>
+            <string>/opt/local/var/run/uwsgi/apps</string>
+            <string>--logto</string>
+            <string>/opt/local/var/log/uwsgi/emperor.log</string>
+            <string>--emperor-pidfile</string>
+            <string>/opt/local/var/run/uwsgi/emperor.pid</string>
+        </array>
+        <key>Debug</key><false/>
+        <key>Disabled</key><false/>
+        <key>KeepAlive</key><true/>
+</dict>
+</plist>
