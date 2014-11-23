@@ -32,6 +32,13 @@
     setlocal define=^\s*\\(def\\\\|class\\)
 
 
+" HTML
+    autocmd Filetype html setlocal ts=2 sts=2 sw=2
+    autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+    autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+    " au BufRead,BufNewFile *.html setfiletype html
+    " autocmd FileType html set tabstop=2|set shiftwidth=2|set expandtab
+
 " Python FileType
     " associate .wsgi extension with python filetype
     au BufRead,BufNewFile *.wsgi setfiletype python
