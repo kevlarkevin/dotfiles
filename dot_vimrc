@@ -98,7 +98,7 @@
     set showtabline=2                   " Always display the file tab line
     set laststatus=2                    " Always display the status line
     set background=dark
-    colorscheme zenburn                 " Set color scheme
+    colorscheme default                 " Set color scheme
 
     " Column Indicators
     " highlight ColorColumn ctermbg=235 guibg=#2c2d27
