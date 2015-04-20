@@ -19,10 +19,6 @@ for plugin in $(ls $configdir/plugins | grep -v disabled$ ); do
     source $configdir/plugins/$plugin
 done
 
-# Augment PATH
-[ "$(uname)" == "Darwin" ] && [ -d ~/Applications ] && PATH=~/Applications:$PATH
-[ -d ~/bin ] &&  PATH=~/bin:$PATH
-
 # Aliases and Functions
 [ "$(uname)" == "Linux" ] && alias ls='ls --color=auto'
 alias l='ls -CF'        # multicolumn with suffixes for file type
@@ -32,21 +28,6 @@ alias lk='ls -lSrh'     # list long, sort size, largest last
 alias lt='ls -ltrh'     # list long, sort time, by last modified, newest last
 alias lc='ls -ltcrh'    # list long, sort time, by last changed, newest last
 alias lu='ls -lturh'    # list long, sort time, by last access, newest last
-
-function pyclean() { find . -name "*.py[co]" -delete; }
-
-function command_exists() { type "$1" &> /dev/null; }
-
-function ips() {
-    ifconfig | grep "inet " | awk '{ print $2 }'
-    local ip=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+' &)
-    echo -e "WLAN IP: $ip"
-}
-
-function down4me() {
-    curl -s "http://www.downforeveryoneorjustme.com/$1" \
-        | sed '/just you/!d;s/<[^>]*>//g'
-}
 
 function extract () {
     if [ $# -ne 1 ]; then
@@ -74,7 +55,6 @@ function extract () {
     fi
 }
 
-
 # PS1
 function __is_vim_shell() {
     [ ! -z "$VIMRUNTIME" ] && printf "\e[0;36mvim-shell\e[0m"
@@ -100,13 +80,16 @@ function __prompt() {
     fi
     PS2="$ "
     PS3="$ "
-    # PS1='\[\e[1m\]\u@\h:\[\e[1;34m\]\w\[\e[m\]\$ '
 }
 
 PROMPT_COMMAND=__prompt
 
 # Apply Local Settings
 [ -f ~/.profile.local ] && source ~/.profile.local
+
+# Augment PATH
+[ "$(uname)" == "Darwin" ] && [ -d ~/Applications ] && PATH=~/Applications:$PATH
+[ -d ~/bin ] &&  PATH=~/bin:$PATH
 
 # Finally, Remove Duplicates From PATH
 PATH=$(awk -v RS=':' '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}' <<< $PATH)

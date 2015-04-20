@@ -109,7 +109,7 @@ if [ $(uname) == Darwin ]; then
     function emptytrashsecure() { osascript -e "tell application \"Finder\" to empty trash with security"; }
 
     # Fix Hostname
-    function fixHostname() {
+    function fix_hostname() {
         local status=''
         local newHost=$1
         if [ $HOSTNAME == $newHost ]; then
@@ -139,8 +139,4 @@ if [ $(uname) == Darwin ]; then
             esac
         fi
     }
-fi
-
-if [ $(uname) == Darwin ] && [ -s /Applications/Sublime\ Text.app ]; then
-    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 fi
