@@ -83,7 +83,7 @@
 
     " Indentation
     set autoindent                      " Enable autoindent
-    set smartindent                     " Enable smartindent
+    set cindent                         " smartindent unintends comments, c does not, among other things
     set tabstop=4                       " Size of tab
     set shiftwidth=4                    " Num spaces for indentation
     set expandtab                       " Spaces instead of tabs
