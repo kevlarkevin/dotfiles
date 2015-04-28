@@ -103,7 +103,12 @@ function __prompt() {
     # PS1='\[\e[1m\]\u@\h:\[\e[1;34m\]\w\[\e[m\]\$ '
 }
 
-PROMPT_COMMAND=__prompt
+# shared history across multiple shells and tmux panes
+# -n : Append the new history lines
+# -w : Write history which will cause 'erasedups' to occur
+# -c : Clear the history list
+# -r : read the current history file
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; __prompt"
 
 # Apply Local Settings
 [ -f ~/.profile.local ] && source ~/.profile.local
