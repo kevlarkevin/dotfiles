@@ -1,9 +1,9 @@
-[submodule "dot_vim/bundle/vim-airline"]
-	path = dot_vim/bundle/vim-airline
-	url = git@github.com:bling/vim-airline.git
-[submodule "dot_vim/bundle/vim-gitgutter"]
-	path = dot_vim/bundle/vim-gitgutter
-	url = git@github.com:airblade/vim-gitgutter.git
 [submodule "dot_vim/bundle/python-mode"]
 	path = dot_vim/bundle/python-mode
-	url = git@github.com:klen/python-mode.git
+	url = https://github.com/klen/python-mode.git
+[submodule "dot_vim/bundle/vim-airline"]
+	path = dot_vim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "dot_vim/bundle/vim-gitgutter"]
+	path = dot_vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
