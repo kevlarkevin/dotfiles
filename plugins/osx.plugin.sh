@@ -9,16 +9,16 @@ if [ $(uname) == Darwin ]; then
         export MANPATH=/opt/local/share/man:$MANPATH
 
         # bash completion
-        source /opt/local/etc/profile.d/bash_completion.sh
+        # source /opt/local/etc/profile.d/bash_completion.sh
 
         # git-core extras
         source /opt/local/share/git/contrib/completion/git-completion.bash
         source /opt/local/share/git/contrib/completion/git-prompt.sh
 
         # virtualenv + virtualenvwrapper
-        export WORKON_HOME=$HOME/VirtualEnvs
-        export PROJECT_HOME=$HOME/Projects
-        source /opt/local/bin/virtualenvwrapper.sh-2.7
+        # export WORKON_HOME=$HOME/VirtualEnvs
+        # export PROJECT_HOME=$HOME/Projects
+        # source /opt/local/bin/virtualenvwrapper.sh-2.7
     fi
 
     # Change directory to front Finder window's location
