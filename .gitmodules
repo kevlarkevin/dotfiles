@@ -1,6 +1,3 @@
-[submodule "dot_vim/bundle/python-mode"]
-	path = dot_vim/bundle/python-mode
-	url = https://github.com/klen/python-mode.git
 [submodule "dot_vim/bundle/vim-airline"]
 	path = dot_vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
