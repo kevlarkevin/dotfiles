@@ -10,17 +10,18 @@
     " Git-Gutter
     highlight clear SignColumn
     let g:gitgutter_sign_column_always = 1
-    let g:gitgutter_max_signs = 100     " default = 500
+    let g:gitgutter_max_signs = 1000     " default = 500
 
     " Airline
     let g:airline_powerline_fonts = 0
-    let g:airline#extensions#tabline#enabled = 1
+    " let g:airline#extensions#tabline#enabled = 1
 
     " Python-Mode
     let g:pymode_options = 0
     let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257']
     let g:pymode_lint_ignore = "E222,E501,E701,E126,D101,D102"
     let g:pymode_lint_cwindow = 0
+    let g:pymode_trim_whitespaces = 1
     let g:pymode_indent = 1
     let g:pymode_folding = 1
     let g:pymode_virtualenv = 1
@@ -60,7 +61,7 @@
     set wildmenu                        " List of matches above cmd line
     set wildmode=list:longest,full      " Match > longest > all
     set lazyredraw                      " Do not redraw when running macros
-    " set list                            " Show 'hidden' characters
+    set list                            " Show 'hidden' characters
     set listchars=tab:<-,trail:~        " Show tabs and trailing spaces
     set scrolloff=5                     " Scroll off, cursor context
     set scrolljump=3                    " Lines to scroll at a time
@@ -89,8 +90,9 @@
     " set smartindent                     " Enable smartindent
     set tabstop=4                       " Size of tab
     set shiftwidth=4                    " Num spaces for indentation
-    set expandtab                       " Spaces instead of tabs
-    set softtabstop=4                   " Delete 4 spaces if delete at tabstop
+	set expandtab                       " Spaces instead of tabs
+	" set noexpandtab
+	" set softtabstop=4                   " Delete 4 spaces if delete at tabstop
 
     " Folding
     " set foldmethod=indent               " fold based on indent
