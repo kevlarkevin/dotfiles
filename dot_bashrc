@@ -1,7 +1,6 @@
 #!/bin/bash
 # ~/.bashrc
 
-
 # General Settings
 shopt -s cdspell
 shopt -s histappend
@@ -43,11 +42,6 @@ function ips() {
     echo -e "WLAN IP: $ip"
 }
 
-function down4me() {
-    curl -s "http://www.downforeveryoneorjustme.com/$1" \
-        | sed '/just you/!d;s/<[^>]*>//g'
-}
-
 function extract () {
     if [ $# -ne 1 ]; then
         echo "Error: No file specified."
@@ -73,7 +67,6 @@ function extract () {
         echo "'$1' is not a valid file"
     fi
 }
-
 
 # PS1
 function __is_vim_shell() {
@@ -106,7 +99,6 @@ function __prompt() {
 # shared history across multiple shells and tmux panes
 # -n : Append the new history lines
 # -w : Write history which will cause 'erasedups' to occur
-# -c : Clear the history list
 # -r : read the current history file
 PROMPT_COMMAND="history -n; history -w; history -c; history -r; __prompt"
 
