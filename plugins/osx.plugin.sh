@@ -3,6 +3,11 @@
 
 # OS check
 if [ $(uname) == Darwin ]; then
+    # application shortcuts
+    if [ -s /Applications/Sublime\ Text.app ]; then
+        alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+    fi
+
     # MacPorts
     if [ -e /opt/local/bin/port ]; then
         export PATH=/opt/local/bin:/opt/local/sbin:$PATH
@@ -16,9 +21,9 @@ if [ $(uname) == Darwin ]; then
         source /opt/local/share/git/contrib/completion/git-prompt.sh
 
         # virtualenv + virtualenvwrapper
-        # export WORKON_HOME=$HOME/VirtualEnvs
-        # export PROJECT_HOME=$HOME/Projects
-        # source /opt/local/bin/virtualenvwrapper.sh-2.7
+        export WORKON_HOME=$HOME/VirtualEnvs
+        export PROJECT_HOME=$HOME/Projects
+        source /usr/local/bin/virtualenvwrapper.sh
     fi
 
     # Change directory to front Finder window's location
@@ -113,15 +118,9 @@ if [ $(uname) == Darwin ]; then
         local status=''
         local newHost=$1
         if [ $HOSTNAME == $newHost ]; then
-            status=0
-        elif [ $HOSTNAME != $newHost ]; then
-            status=1
-        fi
-
-        local changeIt=''
-        if [ $status == 0 ]; then
             printf "hostname: $HOSTNAME\n"
-        elif [ $status == 1 ]; then
+        elif [ $HOSTNAME != $newHost ]; then
+            local changeIt=''
             printf "\nchange local hostname to $newHost?\n"
             read -p "this action will prompt for password. (Y/n): " changeIt
             case $changeIt in
@@ -141,6 +140,3 @@ if [ $(uname) == Darwin ]; then
     }
 fi
 
-if [ $(uname) == Darwin ] && [ -s /Applications/Sublime\ Text.app ]; then
-    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-fi
