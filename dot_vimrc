@@ -14,57 +14,54 @@
 
     " Airline
     let g:airline_powerline_fonts = 0
-    " let g:airline#extensions#tabline#enabled = 1
 
-    " Python-Mode
-    let g:pymode_options = 0
-    let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257']
-    let g:pymode_lint_ignore = "E222,E501,E701,E126,D101,D102"
-    let g:pymode_lint_cwindow = 0
-    let g:pymode_trim_whitespaces = 1
-    let g:pymode_indent = 1
-    let g:pymode_folding = 1
-    let g:pymode_virtualenv = 1
-    let g:pymode_run = 0
-    let g:pymode_rope = 0
-    setlocal complete+=t
-    setlocal formatoptions-=t
-    if v:version > 702 && !&relativenumber
-        setlocal number
-    endif
-    setlocal commentstring=#%s
-    setlocal define=^\s*\\(def\\\\|class\\)
+    " Syntastic
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 0
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_python_checkers = ['flake8']  " flake8 'pyflakes', 'pylint'
+    " default ignores E121, E123, E126, E133, E226, E241, E242 and E704
+    let g:syntastic_python_flake8_args = "--ignore=
+        \ E121,E123,E126,E133,E226,E241,E242,E221,E222,E501,E701,E704,D203,D204"
+    " E221 - multiple spaces before operator
+    " E222
+    " E501
+    " E701
+    " E126
+    " D102 - missing docstring in public method
+    " D203 - blank line before class docstring
+    " D204 - blank line after class docstring
+    " D205 - 
+    " F403 - `from pkg import *` used, unable to detect defined names
 
 
 " HTML
     autocmd Filetype html setlocal ts=2 sts=2 sw=2
     autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
     autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
-    " au BufRead,BufNewFile *.html setfiletype html
-    " autocmd FileType html set tabstop=2|set shiftwidth=2|set expandtab
+
 
 " Python FileType
     " associate .wsgi extension with python filetype
     au BufRead,BufNewFile *.wsgi setfiletype python
-    au FileType python      call ModePython()
-    function! ModePython()
-        map  <silent> <F7> :PymodeLint<CR>
-        imap <silent> <F7> <Esc><F7>
-    endfunction
 
 
 " General Settings
     set number                          " Show line numbers
     set numberwidth=6                   " Line number column width
     set showcmd                         " Show commands as they are typed
-    set synmaxcol=5000                  " Stop syntax hl after n char/ln
+    set synmaxcol=10000                  " Stop syntax hl after n char/ln
     set wildmenu                        " List of matches above cmd line
     set wildmode=list:longest,full      " Match > longest > all
     set lazyredraw                      " Do not redraw when running macros
     set list                            " Show 'hidden' characters
     set listchars=tab:<-,trail:~        " Show tabs and trailing spaces
     set scrolloff=5                     " Scroll off, cursor context
-    set scrolljump=3                    " Lines to scroll at a time
     set virtualedit=block,onemore       " Allow virtual editing in block mode
     set diffopt+=vertical,iwhite        " Vertical diffsplits: ignore whitespace
     set autoread                        " Autoread changes made out of vim
@@ -82,35 +79,32 @@
     set incsearch                       " Incremental search
     set ignorecase                      " If all lower, ignore case
     set smartcase                       " If search param has upper, use cased
-    set wrapscan                        " Wrap search at EOF
     set hlsearch                        " Highlight seach terms
 
     " Indentation
-    " set autoindent                      " Enable autoindent
-    " set smartindent                     " Enable smartindent
     set tabstop=4                       " Size of tab
     set shiftwidth=4                    " Num spaces for indentation
-	set expandtab                       " Spaces instead of tabs
-	" set noexpandtab
-	" set softtabstop=4                   " Delete 4 spaces if delete at tabstop
+    set expandtab                       " Spaces instead of tabs
+    set softtabstop=4                   " Delete 4 spaces if delete at tabstop
 
     " Folding
-    " set foldmethod=indent               " fold based on indent
+    set foldmethod=indent               " fold based on indent
 
     " Completion Pop-Up Settings
     set pumheight=15                    " Don't show >n items popup
     set completeopt=menu,longest        " How to show and insert completions
     set complete=.,w,u,b                " Where to look for completions
+
     " Visuals
     set showtabline=2                   " Always display the file tab line
     set laststatus=2                    " Always display the status line
     set background=dark
     colorscheme default                 " Set color scheme
 
-    " Column Indicators
-    " highlight ColorColumn ctermbg=235 guibg=#2c2d27
-    " let &colorcolumn="80,120"
-
+    " swap settings
+    set noswapfile
+    set nobackup
+    set nowb
 
 " Key Mappings and Bindings
     " Smarter tab key
@@ -155,17 +149,20 @@
 
 " Conveniences
     " Set foldlevel on open
+    " set foldlevelstart=99
     au BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))
 
     " Always set the current working directory to the currently edited file
-    au BufRead,BufNewFile,BufFilePost * lcd %:p:h
+    " au BufRead,BufNewFile,BufFilePost * lcd %:p:h
 
     " Try to restore cursor position when reading a buffer, if any
     au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
     " Delete any buffer that becomes hidden
-    au BufReadPost,BufNewFile,BufFilePost * set bufhidden=delete
+    " au BufReadPost,BufNewFile,BufFilePost * set bufhidden=delete
 
+
+" Explorer
     " Prevent some files/directories from being listed in file explorer
     let g:netrw_hide=1
     let g:netrw_list_hide='\.pyc$,\.pyo$,\.o$,\.swp$,^\.svn/$,^\.DS_Store$'
@@ -175,8 +172,9 @@
     if has("gui_macvim") && has("gui_running")
         set lines=68                    " Resize the window
         set columns=120
-        " set guifont=Ubuntu\ Mono\ derivative\ Powerline:h12
-        set guioptions-=T               " Remove the toolbar
+        set guifont=Menlo\ Regular:h10
+        " set guioptions-=T               " Remove the toolbar
+        set guioptions-=e               " use GUI tabs
         set guicursor=a:blinkon0        " Disable cursor blink
         set guitablabel=%m\ %t          " Define custom label when using GUI tabs
         set fuoptions=maxvert,maxhorz   " Maximize when entering fullscreen mode
