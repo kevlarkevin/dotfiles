@@ -72,7 +72,7 @@ else
 fi
 
 echo '- checking for virtualenvwrapper.sh'
-if [ ! -e /usr/local/bin/ipython ]; then
+if [ ! -e /usr/local/bin/virtualenvwrapper.sh ]; then
     echo '++ installing /usr/local/bin/virtualenvwrapper.sh'
     sudo pip install virtualenvwrapper
 else
