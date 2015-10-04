@@ -13,13 +13,30 @@ export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd    # linux ish
 export EDITOR='vim'
 
 # Plugins
-configdir=~/.dotfiles
-for plugin in $(ls $configdir/plugins | grep -v disabled$ ); do
-    source $configdir/plugins/$plugin
-done
+configdir=$HOME/.dotfiles
+# for plugin in $(ls $configdir/plugins | grep -v disabled$ ); do
+#     source $configdir/plugins/$plugin
+# done
+#
+if [ "$(uname)" == "Darwin" ]; then
+    printf "+ darwin"
+    for plugin in $(ls $configdir/plugins/darwin* | grep -v disabled$ ); do
+        # echo "-- plugin:  $plugin"
+        source $plugin
+    done
+    PATH=$PATH:~/Applications
+fi
+
+
+if [ $(which tmux) ]; then
+    printf " + tmux"
+    for plugin in $(ls $configdir/plugins/tmux* | grep -v disabled$ ); do
+        # echo "-- plugin:    $plugin"
+        source $plugin
+    done
+fi
 
 # Augment PATH
-[ "$(uname)" == "Darwin" ] && [ -d ~/Applications ] && PATH=~/Applications:$PATH
 [ -d ~/bin ] &&  PATH=~/bin:$PATH
 
 # Aliases and Functions
@@ -107,3 +124,4 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; __prompt"
 
 # Finally, Remove Duplicates From PATH
 PATH=$(awk -v RS=':' '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}' <<< $PATH)
+export PATH=$PATH

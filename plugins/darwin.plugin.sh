@@ -138,5 +138,14 @@ if [ $(uname) == Darwin ]; then
             esac
         fi
     }
+    # function __defaultsDockStaticOnlyTrue() {
+    #     # hidden dock setting to only shows active apps
+    #     defaults write com.apple.dock static-only -bool TRUE; killall
+    # }
+
+    # function __defaultsDockStaticOnlyFalse() {
+    #     # hidden dock setting to only shows active apps
+    #     defaults write com.apple.dock static-only -bool FALSE; killall
+    # }
 fi
 
