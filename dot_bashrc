@@ -1,10 +1,16 @@
 #!/bin/bash
 # ~/.bashrc
 
+# notes: shared terminal history across terminals/tmux
+#
+# shopt -s histappend
+# export HISTCONTROL=ignoredups:erasedups
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 # General Settings
 shopt -s cdspell
 shopt -s histappend
-export HISTCONTROL=ignoredups:ignorespace
+export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTIGNORE=ls:l:la:ll:lk:lt:lc:lu:cd:pwd
 export GREP_OPTIONS='--color=auto'
 export LS_OPTIONS='--color=auto'
@@ -113,11 +119,9 @@ function __prompt() {
     # PS1='\[\e[1m\]\u@\h:\[\e[1;34m\]\w\[\e[m\]\$ '
 }
 
-# shared history across multiple shells and tmux panes
-# -n : Append the new history lines
-# -w : Write history which will cause 'erasedups' to occur
-# -r : read the current history file
-PROMPT_COMMAND="history -n; history -w; history -c; history -r; __prompt"
+
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; __prompt"
 
 # Apply Local Settings
 [ -f ~/.profile.local ] && source ~/.profile.local
