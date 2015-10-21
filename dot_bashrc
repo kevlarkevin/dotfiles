@@ -24,10 +24,14 @@ configdir=$HOME/.dotfiles
 #     source $configdir/plugins/$plugin
 # done
 #
+
+function stderr() {
+    printf "$1" 1>&2
+}
+
 if [ "$(uname)" == "Darwin" ]; then
-    printf "+ darwin"
+    # stderr "+ darwin"
     for plugin in $(ls $configdir/plugins/darwin* | grep -v disabled$ ); do
-        # echo "-- plugin:  $plugin"
         source $plugin
     done
     PATH=$PATH:~/Applications
@@ -35,9 +39,8 @@ fi
 
 
 if [ $(which tmux) ]; then
-    printf " + tmux"
+    # stderr " + tmux"
     for plugin in $(ls $configdir/plugins/tmux* | grep -v disabled$ ); do
-        # echo "-- plugin:    $plugin"
         source $plugin
     done
 fi
@@ -54,8 +57,6 @@ alias lk='ls -lSrh'     # list long, sort size, largest last
 alias lt='ls -ltrh'     # list long, sort time, by last modified, newest last
 alias lc='ls -ltcrh'    # list long, sort time, by last changed, newest last
 alias lu='ls -lturh'    # list long, sort time, by last access, newest last
-
-function pyclean() { find . -name "*.py[co]" -delete; }
 
 function command_exists() { type "$1" &> /dev/null; }
 
