@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>KeepAlive</key>
+    <true/>
+    <key>Label</key>
+    <string>org.collectd.collectd</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/opt/local/sbin/collectd</string>
+      <string>-f</string>
+      <string>-C</string>
+      <string>/opt/local/etc/collectd.conf</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardErrorPath</key>
+    <string>/opt/local/log/collectd.log</string>
+    <key>StandardOutPath</key>
+    <string>/opt/local/log/collectd.log</string>
+  </dict>
+</plist>
