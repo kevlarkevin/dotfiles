@@ -23,7 +23,9 @@ if [ $(uname) == Darwin ]; then
         # virtualenv + virtualenvwrapper
         export WORKON_HOME=$HOME/VirtualEnvs
         export PROJECT_HOME=$HOME/Projects
-        source /usr/local/bin/virtualenvwrapper.sh
+        if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+            source /usr/local/bin/virtualenvwrapper.sh
+        fi
     fi
 
     # Change directory to front Finder window's location
