@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# use dns-sd to list devies that are broadcasting ssh
+# services via Bonjour
+#
+# man dns-sd
+
+dns-sd -B _ssh._tcp .
