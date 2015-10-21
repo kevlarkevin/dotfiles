@@ -26,13 +26,16 @@
     let g:syntastic_check_on_wq = 0
     let g:syntastic_python_checkers = ['flake8']  " flake8 'pyflakes', 'pylint'
     " default ignores E121, E123, E126, E133, E226, E241, E242 and E704
-    let g:syntastic_python_flake8_args = "--ignore=
-        \ E121,E123,E126,E133,E226,E241,E242,E221,E222,E501,E701,E704,D203,D204"
+    let g:syntastic_python_flake8_args = "
+        \ --ignore=
+        \ E121,E123,E126,E133,E226,E241,E242,E221,E222,E501,E701,E704,D203,D204
+        \ --max-line-length=160"
     " E221 - multiple spaces before operator
     " E222
     " E501
     " E701
     " E126
+    " E501 - line too long
     " D102 - missing docstring in public method
     " D203 - blank line before class docstring
     " D204 - blank line after class docstring
